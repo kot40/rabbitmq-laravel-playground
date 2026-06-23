@@ -199,42 +199,74 @@ return [
     'defaults' => [
         'supervisor-1' => [
             'connection' => 'rabbitmq',      // по умолчанию RabbitMQ было Redis
-            'queue'      => ['default'],
-            'balance'    => 'simple',
-            'processes'  => 2,
-            'tries'      => 3,
-            'timeout'    => 90,
-            'memory'     => 128,
-            'nice'       => 0,
+            'queue' => ['default'],
+            'balance' => 'simple',
+            'processes' => 2,
+            'tries' => 3,
+            'timeout' => 90,
+            'memory' => 128,
+            'nice' => 0,
         ],
     ],
 
+    // 'environments' => [
+    //     'local' => [
+    //         'supervisor-1' => [
+    //             'connection' => 'rabbitmq',        // обязательно
+    //             'queue'      => ['default'],       // какие очереди обрабатывать
+    //             'balance'    => 'simple',          // или 'auto'
+    //             'processes'  => 2,                 // фиксированное количество процессов
+    //             'tries'      => 3,
+    //             'timeout'    => 150,
+    //             'memory'     => 128,
+    //         ],
+    //     ],
+
+    //     'production' => [
+    //         'supervisor-1' => [
+    //             'connection'      => 'rabbitmq',
+    //             'queue'           => ['default'],
+    //             'balance'         => 'auto',           // умное масштабирование
+    //             'autoScalingStrategy' => 'time',       // или 'size'
+    //             'minProcesses'    => 1,
+    //             'maxProcesses'    => 10,
+    //             'balanceMaxShift' => 1,
+    //             'balanceCooldown' => 3,
+    //             'tries'           => 3,
+    //             'timeout'         => 120,
+    //             'memory'          => 256,
+    //         ],
+    //     ],
+    // ],
     'environments' => [
         'local' => [
-            'supervisor-1' => [
-                'connection' => 'rabbitmq',        // обязательно
-                'queue'      => ['default'],       // какие очереди обрабатывать
-                'balance'    => 'simple',          // или 'auto'
-                'processes'  => 2,                 // фиксированное количество процессов
-                'tries'      => 3,
-                'timeout'    => 150,
-                'memory'     => 128,
+            'supervisor-emails' => [
+                'connection' => 'rabbitmq',
+                'queue' => ['emails'],
+                'balance' => 'auto',
+                'processes' => 2,
+                'tries' => 3,
+                'timeout' => 60,
+                'memory' => 128,
             ],
-        ],
 
-        'production' => [
-            'supervisor-1' => [
-                'connection'      => 'rabbitmq',
-                'queue'           => ['default'],
-                'balance'         => 'auto',           // умное масштабирование
-                'autoScalingStrategy' => 'time',       // или 'size'
-                'minProcesses'    => 1,
-                'maxProcesses'    => 10,
-                'balanceMaxShift' => 1,
-                'balanceCooldown' => 3,
-                'tries'           => 3,
-                'timeout'         => 120,
-                'memory'          => 256,
+            'supervisor-notifications' => [
+                'connection' => 'rabbitmq',
+                'queue' => ['notifications'],
+                'balance' => 'auto',
+                'processes' => 3,
+                'tries' => 3,
+                'timeout' => 90,
+            ],
+
+            'supervisor-orders' => [
+                'connection' => 'rabbitmq',
+                'queue' => ['orders'],
+                'balance' => 'auto',
+                'processes' => 1,           // тяжёлые задачи — меньше процессов
+                'tries' => 5,
+                'timeout' => 300,         // 5 минут на задачу
+                'memory' => 256,
             ],
         ],
     ],
