@@ -23,7 +23,7 @@ class SendWelcomeEmail implements ShouldQueue
     public function handle()
     {
         // Здесь логика отправки email
-        Log::info("Welcome email sent to: {$this->email}");
-        sleep(3); // для демонстрации
+        Log::info("Welcome Email sent to: {$this->email}");
+        sleep(7); // для демонстрации
     }
 }

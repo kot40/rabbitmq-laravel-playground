@@ -117,6 +117,7 @@ return [
             ],
 
             'queue' => env('RABBITMQ_QUEUE', 'default'), // важно!
+            'worker' => env('RABBITMQ_WORKER', 'horizon'), // важно!
         ],      
 
     ],

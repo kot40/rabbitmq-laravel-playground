@@ -97,7 +97,7 @@ return [
     */
 
     'waits' => [
-        'redis:default' => 60,
+        'rabbitmq:default' => 60,     // изменили с redis на rabbitmq
     ],
 
     /*
@@ -198,32 +198,43 @@ return [
 
     'defaults' => [
         'supervisor-1' => [
-            'connection' => 'redis',
-            'queue' => ['default'],
-            'balance' => 'auto',
-            'autoScalingStrategy' => 'time',
-            'maxProcesses' => 1,
-            'maxTime' => 0,
-            'maxJobs' => 0,
-            'memory' => 128,
-            'tries' => 1,
-            'timeout' => 60,
-            'nice' => 0,
+            'connection' => 'rabbitmq',      // по умолчанию RabbitMQ было Redis
+            'queue'      => ['default'],
+            'balance'    => 'simple',
+            'processes'  => 2,
+            'tries'      => 3,
+            'timeout'    => 90,
+            'memory'     => 128,
+            'nice'       => 0,
         ],
     ],
 
     'environments' => [
-        'production' => [
+        'local' => [
             'supervisor-1' => [
-                'maxProcesses' => 10,
-                'balanceMaxShift' => 1,
-                'balanceCooldown' => 3,
+                'connection' => 'rabbitmq',        // обязательно
+                'queue'      => ['default'],       // какие очереди обрабатывать
+                'balance'    => 'simple',          // или 'auto'
+                'processes'  => 2,                 // фиксированное количество процессов
+                'tries'      => 3,
+                'timeout'    => 150,
+                'memory'     => 128,
             ],
         ],
 
-        'local' => [
+        'production' => [
             'supervisor-1' => [
-                'maxProcesses' => 3,
+                'connection'      => 'rabbitmq',
+                'queue'           => ['default'],
+                'balance'         => 'auto',           // умное масштабирование
+                'autoScalingStrategy' => 'time',       // или 'size'
+                'minProcesses'    => 1,
+                'maxProcesses'    => 10,
+                'balanceMaxShift' => 1,
+                'balanceCooldown' => 3,
+                'tries'           => 3,
+                'timeout'         => 120,
+                'memory'          => 256,
             ],
         ],
     ],
