@@ -1,0 +1,11 @@
+{
+    "mcpServers": {
+        "laravel-boost": {
+            "command": "/Users/roman/Library/Application Support/Herd/bin/php84",
+            "args": [
+                "/Volumes/T7Touch/source/_learning/rabbitmq-laravel-playground/artisan",
+                "boost:mcp"
+            ]
+        }
+    }
+}
