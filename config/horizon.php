@@ -268,6 +268,15 @@ return [
                 'timeout' => 300,         // 5 минут на задачу
                 'memory' => 256,
             ],
+
+            'supervisor-analytics' => [
+                'connection' => 'rabbitmq',
+                'queue'      => ['analytics'],
+                'balance' => 'auto',
+                'processes' => 3,
+                'tries' => 3,
+                'timeout' => 90,
+            ],
         ],
     ],
 

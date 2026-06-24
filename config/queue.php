@@ -103,21 +103,24 @@ return [
 
             'options' => [
                 'exchange' => [
-                    'name'    => env('RABBITMQ_EXCHANGE_NAME', 'laravel'),
+                    'name'    => 'events',
                     'declare' => true,
-                    'type'    => 'direct',
+                    'type'    => 'topic',
                     'durable' => true,
                 ],
 
                 'queue' => [
-                    'declare' => true,
-                    'bind'    => true,
-                    'durable' => true,
+                    // 'exchange'             => 'events',
+                    // 'exchange_type'        => 'topic',
+                    'exchange_routing_key' => '%s',        // важно для topic
+                    'declare'              => true,
+                    'bind'                 => true,
+                    'durable'              => true,
                 ],
             ],
 
-            'queue' => env('RABBITMQ_QUEUE', 'default'), // важно!
-            'worker' => env('RABBITMQ_WORKER', 'horizon'), // важно!
+            'queue'  => env('RABBITMQ_QUEUE', 'default'),
+            'worker' => env('RABBITMQ_WORKER', 'horizon'),
         ],      
 
     ],

@@ -6,6 +6,7 @@ use App\Jobs\SendNotificationJob;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use App\Jobs\SendWelcomeEmail;
+use App\Events\OrderCreated;
 
 Route::get('/', function () {
     return view('welcome');
@@ -67,17 +68,6 @@ Route::get('/send-emails', function () {
 });
 
 
-// Route::get('/send-notifications', function () {
-//     for ($i = 1; $i <= 8; $i++) {
-//         \App\Jobs\SendNotificationJob::dispatch(
-//             "user{$i}",                    // userId
-//             "Ваш заказ готов к отправке! #{$i}",  // message
-//             'push'                         // type
-//         );
-//     }
-//     return 'Отправлено 8 уведомлений в очередь notifications';
-// });
-
 // the same as above but with named parameters
 Route::get('/send-notifications', function () {
     for ($i = 1; $i <= 8; $i++) {
@@ -96,4 +86,20 @@ Route::get('/process-orders', function () {
         ProcessOrderJob::dispatch($i);
     }
     return 'Отправлено 3 order jobs';
+});
+
+
+Route::get('/order-created', function () {
+    $order = [
+        'id'          => rand(10000, 99999),
+        'user_id'     => 42,
+        'user_email'  => 'customer@example.com',
+        'amount'      => 2990,
+        'status'      => 'created',
+    ];
+
+    // Одно событие → разлетается на 3 разные очереди!
+    event(new OrderCreated($order));
+
+    return '✅ Событие OrderCreated отправлено → должно уйти в 3 очереди';
 });
