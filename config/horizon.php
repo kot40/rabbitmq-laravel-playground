@@ -277,6 +277,34 @@ return [
                 'tries' => 3,
                 'timeout' => 90,
             ],
+
+            // Topic Exchange consumers
+            'supervisor-topic-europe' => [
+                'connection' => 'rabbitmq',
+                'queue'      => ['topic.orders.europe'],
+                'balance'    => 'simple',
+                'processes'  => 2,
+                'tries'      => 3,
+                'timeout'    => 60,
+            ],
+
+            'supervisor-topic-new-orders' => [
+                'connection' => 'rabbitmq',
+                'queue'      => ['topic.orders.new'],
+                'balance'    => 'simple',
+                'processes'  => 2,
+                'tries'      => 3,
+                'timeout'    => 60,
+            ],
+
+            'supervisor-topic-all' => [
+                'connection' => 'rabbitmq',
+                'queue'      => ['topic.orders.all'],
+                'balance'    => 'simple',
+                'processes'  => 2,
+                'tries'      => 3,
+                'timeout'    => 60,
+            ],
         ],
     ],
 
