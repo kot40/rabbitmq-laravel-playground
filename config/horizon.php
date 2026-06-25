@@ -278,6 +278,43 @@ return [
                 'timeout' => 90,
             ],
 
+            // Microservices consumers
+            'supervisor-ms-invoices' => [
+                'connection' => 'rabbitmq-ms-invoices',
+                'queue'      => ['ms.invoices.incoming'],
+                'balance'    => 'simple',
+                'processes'  => 2,
+                'tries'      => 3,
+                'timeout'    => 60,
+            ],
+
+            'supervisor-ms-delivery' => [
+                'connection' => 'rabbitmq-ms-delivery',
+                'queue'      => ['ms.delivery.incoming'],
+                'balance'    => 'simple',
+                'processes'  => 2,
+                'tries'      => 3,
+                'timeout'    => 60,
+            ],
+
+            'supervisor-ms-order-invoice-updates' => [
+                'connection' => 'rabbitmq-ms-orders',
+                'queue'      => ['ms.orders.invoice-updates'],
+                'balance'    => 'simple',
+                'processes'  => 2,
+                'tries'      => 3,
+                'timeout'    => 60,
+            ],
+
+            'supervisor-ms-order-delivery-updates' => [
+                'connection' => 'rabbitmq-ms-orders',
+                'queue'      => ['ms.orders.delivery-updates'],
+                'balance'    => 'simple',
+                'processes'  => 2,
+                'tries'      => 3,
+                'timeout'    => 60,
+            ],
+
             // Topic Exchange consumers
             'supervisor-topic-europe' => [
                 'connection' => 'rabbitmq',

@@ -88,6 +88,58 @@ return [
                 'deferred',
             ],
         ],
+        // Microservices connections — каждый сервис публикует в свой exchange
+        'rabbitmq-ms-orders' => [
+            'driver' => 'rabbitmq',
+            'hosts'  => [[
+                'host'     => env('RABBITMQ_HOST', '127.0.0.1'),
+                'port'     => env('RABBITMQ_PORT', 5672),
+                'user'     => env('RABBITMQ_USER', 'guest'),
+                'password' => env('RABBITMQ_PASSWORD', 'guest'),
+                'vhost'    => env('RABBITMQ_VHOST', '/'),
+            ]],
+            'options' => [
+                'exchange' => ['name' => 'ms.orders', 'declare' => true, 'type' => 'topic', 'durable' => true],
+                'queue'    => ['exchange' => 'ms.orders', 'exchange_type' => 'topic', 'exchange_routing_key' => '%s', 'durable' => true],
+            ],
+            'queue'  => 'default',
+            'worker' => env('RABBITMQ_WORKER', 'horizon'),
+        ],
+
+        'rabbitmq-ms-invoices' => [
+            'driver' => 'rabbitmq',
+            'hosts'  => [[
+                'host'     => env('RABBITMQ_HOST', '127.0.0.1'),
+                'port'     => env('RABBITMQ_PORT', 5672),
+                'user'     => env('RABBITMQ_USER', 'guest'),
+                'password' => env('RABBITMQ_PASSWORD', 'guest'),
+                'vhost'    => env('RABBITMQ_VHOST', '/'),
+            ]],
+            'options' => [
+                'exchange' => ['name' => 'ms.invoices', 'declare' => true, 'type' => 'topic', 'durable' => true],
+                'queue'    => ['exchange' => 'ms.invoices', 'exchange_type' => 'topic', 'exchange_routing_key' => '%s', 'durable' => true],
+            ],
+            'queue'  => 'default',
+            'worker' => env('RABBITMQ_WORKER', 'horizon'),
+        ],
+
+        'rabbitmq-ms-delivery' => [
+            'driver' => 'rabbitmq',
+            'hosts'  => [[
+                'host'     => env('RABBITMQ_HOST', '127.0.0.1'),
+                'port'     => env('RABBITMQ_PORT', 5672),
+                'user'     => env('RABBITMQ_USER', 'guest'),
+                'password' => env('RABBITMQ_PASSWORD', 'guest'),
+                'vhost'    => env('RABBITMQ_VHOST', '/'),
+            ]],
+            'options' => [
+                'exchange' => ['name' => 'ms.delivery', 'declare' => true, 'type' => 'topic', 'durable' => true],
+                'queue'    => ['exchange' => 'ms.delivery', 'exchange_type' => 'topic', 'exchange_routing_key' => '%s', 'durable' => true],
+            ],
+            'queue'  => 'default',
+            'worker' => env('RABBITMQ_WORKER', 'horizon'),
+        ],
+
         'rabbitmq' => [
             'driver' => 'rabbitmq',
 
