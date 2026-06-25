@@ -110,9 +110,9 @@ return [
                 ],
 
                 'queue' => [
-                    // 'exchange'             => 'events',
-                    // 'exchange_type'        => 'topic',
-                    'exchange_routing_key' => '%s',        // важно для topic
+                    'exchange'             => 'events',
+                    'exchange_type'        => 'topic',
+                    'exchange_routing_key' => '%s',        // routing key = имя очереди
                     'declare'              => true,
                     'bind'                 => true,
                     'durable'              => true,
