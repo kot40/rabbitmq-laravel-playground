@@ -20,11 +20,11 @@ class TopicOrderJob implements ShouldQueue
 
     public function handle(): void
     {
-        $queue = $this->queue ?? 'unknown';
+        $queue = $this->job?->getQueue() ?? 'unknown';
         Log::info("[TOPIC] Consumer на очереди [{$queue}] получил событие [{$this->routingKey}]", [
             'order' => $this->order,
         ]);
 
-        echo "[TOPIC] Queue: {$queue} | RoutingKey: {$this->routingKey} | Order: #{$this->order['id']}" . PHP_EOL;
+        echo "[TOPIC] Queue: {$queue} | RoutingKey: {$this->routingKey} | Order: #{$this->order['id']}\n";
     }
 }
