@@ -1,15 +1,5 @@
-<div align="center" style="display: flex; align-items: center; justify-content: center; gap: 40px;">
-  <a href="https://laravel.com" target="_blank">
-    <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" 
-         width="340" 
-         alt="Laravel Logo">
-  </a>
-  <a href="https://www.rabbitmq.com" target="_blank">
-    <img src="https://www.rabbitmq.com/img/rabbitmq-logo-by-tanzu.svg" 
-         width="400" 
-         alt="RabbitMQ Logo">
-  </a>
-</div>
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="340" alt="Laravel Logo"></a></p>
+<p align="center"><a href="https://www.rabbitmq.com" target="_blank"><img src="https://www.rabbitmq.com/img/rabbitmq-logo-with-name.svg" width="230" alt="Laravel Logo"></a></p>
 
 # RabbitMQ - Laravel Playground
 
