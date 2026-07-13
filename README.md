@@ -1,15 +1,13 @@
-<div align="center">
+<div align="center" style="display: flex; align-items: center; justify-content: center; gap: 40px;">
   <a href="https://laravel.com" target="_blank">
     <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" 
          width="360" 
          alt="Laravel Logo">
   </a>
-  <span style="padding-left: 25px;"></span>
   <a href="https://www.rabbitmq.com" target="_blank">
-    <img src="https://static.cdnlogo.com/logos/r/90/rabbitmq.svg"
-      width="50"
-      alt="RabbitMQ Logo"
-      style="padding-bottom: 40px">
+    <img src="https://static.cdnlogo.com/logos/r/90/rabbitmq.svg" 
+         width="50" 
+         alt="RabbitMQ Logo">
   </a>
 </div>
 
